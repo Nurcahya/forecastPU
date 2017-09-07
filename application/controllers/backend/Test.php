@@ -10,7 +10,6 @@ class Test extends CI_Controller {
         $this->load->library(array('form_validation', 'email', 'session'));
         $this->load->helper(array('text', 'url'));
         $this->load->helper('url');
-        $this->load->library('grocery_CRUD');
     }
 
     public function index() {
