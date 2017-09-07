@@ -8,8 +8,6 @@ class Dashboard extends CI_Controller {
         parent::__construct();
         $this->load->library(array('form_validation','email','session'));
         $this->load->helper(array('text','url'));
-        $this->load->library('grocery_CRUD');
-//		    $this->load->model('adminmodel');
     }
 
     public function index() {
