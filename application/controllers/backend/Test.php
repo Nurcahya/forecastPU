@@ -9,7 +9,6 @@ class Test extends CI_Controller {
         parent::__construct();
         $this->load->library(array('form_validation', 'email', 'session'));
         $this->load->helper(array('text', 'url'));
-        $this->load->helper('url');
     }
 
     public function index() {
