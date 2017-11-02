@@ -38,7 +38,7 @@
                         <!-- brand -->
                         <a class="navbar-brand">
                             <img src="<?php echo base_url(); ?>assets/backend/gambar/PU.jpg">
-                            <span class="hidden-folded inline">Forecast</span>
+                            <span class="hidden-folded inline">BBWS<br>Pompengan<br>Jeneberang</span>
                         </a>
                         <!-- / brand -->
                     </div>
@@ -47,7 +47,7 @@
 
                             <ul class="nav" ui-nav>
                                 <li class="nav-header hidden-folded">
-                                    <small class="text-muted">Main</small>
+                                    <small class="text-muted">Navigasi</small>
                                 </li>
 
                                 <li>
@@ -68,6 +68,27 @@
                                     </a>
                                 </li>
 
+                                
+                                <li>
+                                    <a href='<?php echo site_url('backend/ch?id=1') ?>'>
+                                        <span class="nav-icon">
+                                            <i class="material-icons">&#xe1b8;</i>
+                                        </span>
+                                        <span class="nav-text">Riwayat Curah Hujan</span>
+                                    </a>
+                                </li>
+
+
+                                
+                                <li>
+                                    <a href='<?php echo site_url('backend/tma?id=6') ?>'>
+                                        <span class="nav-icon">
+                                            <i class="material-icons">&#xe1b8;</i>
+                                        </span>
+                                        <span class="nav-text">Riwayat Tinggi Air</span>
+                                    </a>
+                                </li>
+                                
                                 <li>
                                     <a href='<?php echo site_url('backend/user') ?>'>
                                         <span class="nav-icon">
@@ -89,7 +110,7 @@
                                 <li>
                                     <a href='<?php echo site_url('backend/about') ?>'>
                                         <span class="nav-icon">
-                                            <i class="material-icons">&#xe1b8;</i>
+                                            <i class="material-icons">&#xe8fd;</i>
                                         </span>
                                         <span class="nav-text">Bantuan</span>
                                     </a>
@@ -120,7 +141,7 @@
                             <ul class="nav navbar-nav mr-auto">
                                 <li class="nav-item dropdown">
                                     <a class="nav-link" href data-toggle="dropdown">
-                                        <span><strong>Aplikasi XXXXXXXXXXXX - Sartika Mitrasejati</strong></span>
+                                        <h3><strong>Halaman Administrator - Aplikasi Monitoring Sungai Sadang</strong></h3>
                                     </a>
                                 </li>
                             </ul>

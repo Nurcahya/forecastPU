@@ -11,6 +11,37 @@ class Datamodel extends CI_Model {
         $this->db->where('id_sensor',$ksens);
 	return $this->db->get('sensor')->row()->id_pos;
     }
+    
+
+    function get_durasi($id) {
+        $this->db->where('id_pos',$id);
+    return $this->db->get('kamera')->row()->durasi;
+    }
+
+    function get_TMA($id) {
+        $query = $this->db->query("select * from (select * from TMA where id_pos = '".$id."'  order by waktu desc) a order by a.waktu asc");
+        return $query;
+    }
+
+    function update_kamera($id){
+        $data = array(
+            'id_pos' => $id,
+            'durasi' => 0
+        );
+        $this->db->where('id_pos', $id);
+        $this->db->update('kamera', $data);
+    }
+    
+
+    function get_CH($id) {
+        $query = $this->db->query("select * from (select * from curah_hujan where id_pos = '".$id."'  order by waktu desc) a order by a.waktu asc");
+        return $query;
+    }
+
+      function get_detailpos($id) {
+        $this->db->where('id_pos',$id);
+	return $this->db->get('pos')->row();
+    }
 
     function insert_sensor($ksens, $waktu) {
         $data = array(
@@ -30,6 +61,16 @@ class Datamodel extends CI_Model {
         );
         $this->db->insert('tma', $data);
     }
+
+    function insert_ch($id, $ch, $waktu) {
+        $data = array(
+            'id_curah'=>'',
+            'id_pos' => $id,
+            'curah_hujan' => $ch,
+            'waktu' => $waktu
+        );
+        $this->db->insert('curah_hujan', $data);
+    }
     
     function insert_video($id, $judul, $waktu) {
         $data = array(
@@ -46,6 +87,16 @@ class Datamodel extends CI_Model {
     }
     
     function get_all_pos() {
+        return $this->db->get('pos')->result();
+    }
+
+    function get_rf_pos() {
+        $this->db->where('tipe','RF');
+        return $this->db->get('pos')->result();
+    }
+
+    function get_wl_pos() {
+        $this->db->where('tipe','WL');
         return $this->db->get('pos')->result();
     }
     

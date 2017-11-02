@@ -881,7 +881,7 @@ a.list-group-item {
   .navbar-brand img,
   .navbar-brand svg {
     max-height: 24px;
-    vertical-align: -4px;
+    vertical-align: 10px;
     display: inline-block; }
   .navbar-brand > span {
     display: inline-block;

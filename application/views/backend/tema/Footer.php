@@ -27,7 +27,7 @@
             $(show).removeClass('hide');
         });
     }); 
-    function ubah(x){
+    function mainkan(x){
         document.getElementById("isivideo").src = "<?php echo base_url(); ?>assets/video/" + x;
         document.getElementById("judulvideo").innerHTML="Video player saat ini memainkan : "+x;
         mediaPlayer = document.getElementById('media-video');

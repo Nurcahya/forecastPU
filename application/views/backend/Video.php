@@ -50,7 +50,7 @@ $this->load->view('backend/tema/Header');
                                 $no = 1;
                                 foreach ($vid as $video) {
                                     ?>                       
-                                    <tr class="<?php echo $video->id_pos; ?> " data-user=".<?php echo $video->id_pos; ?>"><td><a onclick="mainkan('<?php echo $video->judul; ?>')"><?php echo $video->judul; ?></a></td><td><?php echo $video->waktu; ?></td></tr>
+                                    <tr class="<?php echo $video->id_pos; ?> "><td><a onclick="mainkan('<?php echo $video->judul; ?>')"><?php echo $video->judul; ?></a></td><td><?php echo $video->waktu; ?></td></tr>
                                     <?php
                                     $no++;
                                 }

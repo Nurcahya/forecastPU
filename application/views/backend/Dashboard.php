@@ -10,24 +10,24 @@ $this->load->view('backend/tema/Header');
       <div class="padding">
         <div class="row-col">
           <div class="col-xs-4 v-m">
-            <h1 class="_800 l-s-n-4x inline m-r-sm">5,600</h1>
+            <h1 class="_800 l-s-n-4x inline m-r-sm">10</h1>
             <span class="inline l-h-1x">
-              Markets <br>
-              <small class="text-muted">From africa to asia</small>
+              Lokasi <br>
+              <small class="text-muted">Tersebar sepanjang Sungai Sadang</small>
             </span>
           </div>
           <div class="col-xs-4 v-m">
-            <h1 class="_800 l-s-n-4x inline m-r-sm text-primary">31,000</h1>
+            <h1 class="_800 l-s-n-4x inline m-r-sm text-primary">5</h1>
             <span class="inline l-h-1x">
-              Employees  <br>
-              <small class="text-muted">From 16 countries</small>
+              Rainfall Post  <br>
+              <small class="text-muted">Lokasi Curah Hujan</small>
             </span>
           </div>
           <div class="col-xs-4 v-m">
-            <h1 class="_800 l-s-n-4x text-white text-shadow inline m-r-sm">4,300</h1>
+            <h1 class="_800 l-s-n-4x text-white text-shadow inline m-r-sm">5</h1>
             <span class="inline l-h-1x">
-              Suppliers  <br>
-              <small class="text-muted">From Nike to PE</small>
+              Water Level Post  <br>
+              <small class="text-muted">Lokasi Ketinggian Muka Air</small>
             </span>
           </div>
         </div>
@@ -92,7 +92,7 @@ $this->load->view('backend/tema/Header');
     </div>
   </div>
   <div class="row-col">
-    <div class="col-xs-3 v-m text-center text-sm text-muted p-a">Peta Sungai Jeneberang - 2017</div>
+    <div class="col-xs-3 v-m text-center text-sm text-muted p-a">Peta Sungai Sadang - 2017</div>
   </div>
 </div>
 

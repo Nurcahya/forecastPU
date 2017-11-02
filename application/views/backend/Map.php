@@ -57,10 +57,10 @@
 function initialize() {
 //var myLatlng = new google.maps.LatLng(-7.476857,111.600952);
  // var myLatlng = new google.maps.LatLng(-5.227717,119.846191);
- var myLatlng = new google.maps.LatLng(-5.259437, 119.638450);
+ var myLatlng = new google.maps.LatLng(-4.559437, 119.638450);
   var mapOptions = {
     center: myLatlng,   
-        zoom: 10,
+        zoom: 8,
         zoomControl: true,
         zoomControlOptions: {
             style: google.maps.ZoomControlStyle.DEFAULT,

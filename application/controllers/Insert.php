@@ -26,8 +26,23 @@ class Insert extends CI_Controller {
     $ksens =  $_GET['ksens'];
     $this->datamodel->insert_sensor($ksens,$waktu);
     $id=$this->datamodel->get_pos($ksens);
+    $_GET['kamera']=$this->datamodel->get_durasi($id);
     $this->datamodel->insert_tma($id,$nilai,$waktu);
 		//redirect('http://monitoringbendungan.com/grab/tma?ksens='.$ksens.'&tma='.$ta.'&time='.$time.'');
+//    $url[]=('http://monitoringbendungan.com/grab/tma?ksens='.$ksens.'&tma='.$ta.'&time='.$time.'');
+//    $this->multiRequest($url);
+    $this->load->view('202',$_GET);
+    }
+
+     public function CH() {
+    $nilai = $_GET['nilai'];
+    $waktu = $_GET['waktu'];
+    $ksens =  $_GET['ksens'];
+    $this->datamodel->insert_sensor($ksens,$waktu);
+    $id=$this->datamodel->get_pos($ksens);
+    $_GET['kamera']=$this->datamodel->get_durasi($id);
+    $this->datamodel->insert_ch($id,$nilai,$waktu);
+        //redirect('http://monitoringbendungan.com/grab/tma?ksens='.$ksens.'&tma='.$ta.'&time='.$time.'');
 //    $url[]=('http://monitoringbendungan.com/grab/tma?ksens='.$ksens.'&tma='.$ta.'&time='.$time.'');
 //    $this->multiRequest($url);
     $this->load->view('202',$_GET);
@@ -46,4 +61,5 @@ class Insert extends CI_Controller {
 //    $this->multiRequest($url);
     $this->load->view('202',$_GET);
     }
+
 }
