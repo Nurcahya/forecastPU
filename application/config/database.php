@@ -75,6 +75,11 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
+    
+//    'hostname' => 'monitoringdas.saddang.com',
+//        'username' => 'saddang_toto',
+//	'password' => 's4rt1k4ms',
+//	'database' => 'saddang_jeneberang',
 	'hostname' => 'localhost',
 	'username' => 'root',
 	'password' => '',

@@ -8,7 +8,7 @@ class Insert extends CI_Controller {
         parent::__construct();
         $this->load->library('email');
         $this->load->helper('text');
-        $this->load->helper('url');
+        $this->load->helper(array('form', 'url'));
         $this->load->model('datamodel');
         $this->output->set_header('Expires: Sat, 26 Jul 1997 05:00:00 GMT');
         $this->output->set_header('Cache-Control: no-cache, no-store, must-revalidate, max-age=0');
@@ -28,9 +28,9 @@ class Insert extends CI_Controller {
     $id=$this->datamodel->get_pos($ksens);
     $_GET['kamera']=$this->datamodel->get_durasi($id);
     $this->datamodel->insert_tma($id,$nilai,$waktu);
-		//redirect('http://monitoringbendungan.com/grab/tma?ksens='.$ksens.'&tma='.$ta.'&time='.$time.'');
-//    $url[]=('http://monitoringbendungan.com/grab/tma?ksens='.$ksens.'&tma='.$ta.'&time='.$time.'');
-//    $this->multiRequest($url);
+//redirect('http://monitoringbendungan.com/grab/tma?ksens='.$ksens.'&tma='.$ta.'&time='.$time.'');
+//$url[]=('http://monitoringbendungan.com/grab/tma?ksens='.$ksens.'&tma='.$ta.'&time='.$time.'');
+//$this->multiRequest($url);
     $this->load->view('202',$_GET);
     }
 
@@ -42,24 +42,80 @@ class Insert extends CI_Controller {
     $id=$this->datamodel->get_pos($ksens);
     $_GET['kamera']=$this->datamodel->get_durasi($id);
     $this->datamodel->insert_ch($id,$nilai,$waktu);
-        //redirect('http://monitoringbendungan.com/grab/tma?ksens='.$ksens.'&tma='.$ta.'&time='.$time.'');
-//    $url[]=('http://monitoringbendungan.com/grab/tma?ksens='.$ksens.'&tma='.$ta.'&time='.$time.'');
-//    $this->multiRequest($url);
+//redirect('http://monitoringbendungan.com/grab/tma?ksens='.$ksens.'&tma='.$ta.'&time='.$time.'');
+//$url[]=('http://monitoringbendungan.com/grab/tma?ksens='.$ksens.'&tma='.$ta.'&time='.$time.'');
+//$this->multiRequest($url);
     $this->load->view('202',$_GET);
     }
 
-    public function video() {
-    $judul = $_GET['judul'];
-    $waktu = $_GET['waktu'];
-    $ksens =  $_GET['ksens'];
-    $_GET['nilai']=$_GET['judul'];
-    $this->datamodel->insert_sensor($ksens,$waktu);
-    $id=$this->datamodel->get_pos($ksens);
-    $this->datamodel->insert_video($id,$judul,$waktu);
-		//redirect('http://monitoringbendungan.com/grab/tma?ksens='.$ksens.'&tma='.$ta.'&time='.$time.'');
-//    $url[]=('http://monitoringbendungan.com/grab/tma?ksens='.$ksens.'&tma='.$ta.'&time='.$time.'');
-//    $this->multiRequest($url);
-    $this->load->view('202',$_GET);
-    }
+     public function kamera() {
+        $nilai = $_GET['nilai'];
+        $waktu = $_GET['waktu'];
+        $ksens =  $_GET['ksens'];
+        $id=$ksens;
+        $this->datamodel->insert_citra($id,$nilai,$waktu);
+        $_GET['kamera']=$this->datamodel->get_durasi($id);
+        $this->load->view('202',$_GET);
+     }
+     
+     public function form(){
+         $this->load->view('upload', array('error' => ' ' ));
+     }
+          
+     public function file_form(){
+         $this->load->view('upload_file', array('error' => ' ' ));
+     }
+     
+      public function kamera_post() {
+                $config['upload_path']          = './assets/uploads/citra/';
+                $config['allowed_types']        = 'gif|jpg|png';
+                $config['max_size']             = 1200;
 
+                $this->load->library('upload', $config);
+                
+                if ( ! $this->upload->do_upload('citra'))
+                {
+                        $error = array('error' => $this->upload->display_errors());
+
+                        $this->load->view('upload', $error);
+                }
+                else
+                {
+                        $data = array('upload_data' => $this->upload->data());
+                }               
+                $data['nilai'] = $data['upload_data']['file_name'];
+                $data['waktu']= date("Y-m-d H:i:s");
+                $data['ksens'] =  $_POST['ksens'];
+                $id= $data['ksens'];
+                $this->datamodel->insert_citra($id,$data['nilai'],$data['waktu']);
+                $data['kamera']=$this->datamodel->get_durasi($id);
+                $this->load->view('202',$data);         
+     }
+     
+          
+      public function file_post() {
+                $config['upload_path']          = './assets/uploads/files/';
+                $config['allowed_types']        = 'txt|xls|xlsx|csv';
+                $config['max_size']             = 10000;
+
+                $this->load->library('upload', $config);
+                
+                if ( ! $this->upload->do_upload('file'))
+                {
+                        $error = array('error' => $this->upload->display_errors());
+
+                        $this->load->view('upload', $error);
+                }
+                else
+                {
+                        $data = array('upload_data' => $this->upload->data());
+                }               
+                $data['nilai'] = $data['upload_data']['file_name'];
+                $data['waktu']= date("Y-m-d H:i:s");
+                $data['ksens'] =  $_POST['ksens'];
+                $id= $data['ksens'];
+                $this->datamodel->insert_file($id,$data['nilai'],$data['waktu']);
+                $data['kamera']=$this->datamodel->get_durasi($id);
+                $this->load->view('202',$data);         
+     }
 }

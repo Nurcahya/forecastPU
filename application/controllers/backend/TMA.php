@@ -18,10 +18,10 @@ class TMA extends CI_Controller {
         if ($this->session->userdata('username') == '') {
             redirect(base_url());
         } else {
-            $data['link']='user';
-            $data['pos']=$this->datamodel->get_wl_pos();
-            $data['namapos']=$this->datamodel->get_detailpos($_GET['id']);
-            $this->load->view('backend/Tma',$data);
+            $data['link'] = 'user';
+            $data['pos'] = $this->datamodel->get_wl_pos();
+            $data['namapos'] = $this->datamodel->get_detailpos($_GET['id']);
+            $this->load->view('backend/Tma', $data);
         }
     }
 
@@ -31,27 +31,38 @@ class TMA extends CI_Controller {
         $id = $this->uri->segment(4);
         $crud->set_table('tma');
         $crud->set_subject('TMA');
-        $crud->where('tma.id_pos',$id);
+        $crud->where('tma.id_pos', $id);
+        $crud->order_by('waktu','desc');
         $crud->set_relation('id_pos', 'pos', 'nama_pos');
         $crud->unset_add();
         $output = $crud->render();
         $this->load->view('backend/Grid', $output);
     }
 
-    function grafik()
-    {
+    function grafik() {
         $id = $this->uri->segment(4);
-        $data['namapos']=$this->datamodel->get_detailpos($id);
-        $data['item']=$this->datamodel->get_tma($id);
-        $this->load->view('backend/grafik/TMA',$data);
+        $data['namapos'] = $this->datamodel->get_detailpos($id);
+        $data['item'] = $this->datamodel->get_tma($id);
+        $this->load->view('backend/grafik/TMA', $data);
     }
 
-    function graflive(){
+    function graflive() {
         $id = $this->uri->segment(4);
-        $data['namapos']=$this->datamodel->get_detailpos($id);
-        $data['item']=$this->datamodel->get_tma($id);
-        $this->load->view('backend/grafik/live',$data);
+        $data['namapos'] = $this->datamodel->get_detailpos($id);
+        $this->load->view('backend/grafik/TMALive', $data);
     }
+
+    function datalive() {
+        $id = $this->uri->segment(4);
+        $item = $this->datamodel->get_tma($id);
+        $arraydata = array();
+        foreach ($item->result() as $itemnya) {
+            $time = strtotime($itemnya->waktu . "+8hours") * 1000;
+            $arraydata[] = [$time, floatval($itemnya->TMA)];
+        }
+        echo(json_encode($arraydata));
+    }
+
 }
 
 ?>

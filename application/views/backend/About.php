@@ -5,44 +5,52 @@ $this->load->view('backend/tema/Header');
 <div class="padding">
   <div class="row">
     <div class="col-sm-8 col-md-9">
+        
+<?php  if($this->session->flashdata('sukses')=="isinya"){ ?>
+<div class="alert alert-success alert-dismissable fade in">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>Sukses!</strong> Email Anda telah berhasil terkirim. Harap tunggu balasan dari kami.
+</div>
+<?php } ?>
+        
       <h4 class="m-0 m-b-sm text-md">Tentang Aplikasi</h4>
       <div class="m-b" id="accordion">
         <div class="panel box no-border m-b-xs">
           <div class="box-header p-y-sm">
             <a data-toggle="collapse" data-parent="#accordion" data-target="#c_1">
-              Sekilas Tentang Aplikasi Forecasting Sungai Jeneberang
+              Sekilas Tentang Aplikasi Monitoring Sungai Saddang
             </a>
           </div>
           <div id="c_1" class="collapse in">
             <div class="box-body">
-                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, <br><br>raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proide
+Aplikasi MONITORING SUNGAI SADDANG - BBWS POMPENGAN JENEBERANG dibuat dengan memungkinkan pengguna untuk mengatur data pengukuran yang diterima dari sensor dan peralatan ukur lainnya yang ada di masing-masing stasiun pengukuarn. Perangkat lunak ini dirancang agar dapat mudah digunakan (user-friendly) namun handal dan dapat menampung data hasil pengukuran yang besar di dalam database dalam engine SQL. Data hasil pengukuran dapat di-eksport ke berbagai format data seperti excel, sql, csv dan bahkan dapat dicetak.<br><br>Aplikasi ini terdiri dari beberapa menu navigasi, antara lain: Dashboard untuk melihat tampilan peta letak stasiun pengukuran, Lokasi pos untuk melakukan pengaturan terhadap lokasi pos stasiun pengukuran, Riwayat curah hujan untuk melihat riwayat data curah hujan dari setiap stasiun pengukuran, Riwayat tinggi air untuk melihat riwayat data ketinggian muka air sungai dari setiap stasiun pengukuran, Citra kamera untuk melihat riwayat data citra yang dikirimkan melalui setiap kamera di masing-masing stasiun pengukuran, User untuk mengatur akun pengguna yang dapat masuk ke dalam aplikasi ini, Video untuk melihat rekaman CCTV selama 10 detik setiap harinya.
             </div>
           </div>
         </div>
       </div>
       <h4 class="m-t-md text-md">Kirim Pertanyaan</h4>
-      <form name="form-contact" class="form-validation m-b-lg">
+      <form name="form-contact" class="form-validation m-b-lg" method="post" action="about/email">
         <div class="row">
           <div class="col-sm-6 m-b">
             <label>Nama Anda</label>
-            <input type="text" class="form-control" placeholder="Nama" required >
+            <input type="text" class="form-control" name='nama' placeholder="Nama" required >
           </div>
           <div class="col-sm-6 m-b">
             <label>Email</label>
-            <input type="email" class="form-control" placeholder="Email" required >
+            <input type="email" class="form-control" name='email' placeholder="Email" required >
           </div>
         </div>
         <div class="form-group">
           <label>Subjek Pertanyaan</label>
-          <select class="form-control c-select">
-            <option>Website Errors</option>
-            <option>Product Services</option>
-            <option>Login/Signup Problem</option>
+          <select class="form-control c-select" name='subjek'>
+            <option>Aplikasi Error</option>
+            <option>Web Error</option>
+            <option>Database Error</option>
           </select>
         </div>
-        <div class="form-group">
+        <div class="form-group" >
           <label>Pertanyaan Anda</label>
-          <textarea class="form-control" rows="6" placeholder="Pertanyaan"></textarea>
+          <textarea class="form-control" rows="6"  name='isi' placeholder="Pertanyaan"></textarea>
         </div>
         <button type="submit" class="btn btn-info">Submit</button>
       </form>
@@ -82,7 +90,7 @@ $this->load->view('backend/tema/Header');
             </a>
             <div class="list-body">
               <div><a href>Nurcahya Pradana T.P.</a></div>
-              <small class="text-muted text-ellipsis">Software Developer</small>
+              <small class="text-muted text-ellipsis">Software Engineer</small>
             </div>
           </li>
           

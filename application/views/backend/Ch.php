@@ -10,7 +10,7 @@ $this->load->view('backend/tema/header');
           <h3>Grafik Curah Hujan</h3>
         </div>
         <div class="box-body">              
-	<iframe SRC=<?php echo base_url('backend/ch/grafik/').$_GET['id'];?> width=100% height="330" frameBorder="0"></iframe>          
+	<iframe SRC=<?php echo base_url('backend/CH/graflive/').$_GET['id'];?> width=100% height="330" frameBorder="0"></iframe>          
         </div>
       </div>
     </div>

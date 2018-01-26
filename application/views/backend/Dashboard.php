@@ -92,115 +92,58 @@ $this->load->view('backend/tema/Header');
     </div>
   </div>
   <div class="row-col">
-    <div class="col-xs-3 v-m text-center text-sm text-muted p-a">Peta Sungai Sadang - 2017</div>
-  </div>
+    <div class="col-xs-3 v-m text-center text-sm text-muted p-a">Peta Persebaran Stasiun Pengukuran Monitoring Sungai Sadang - 2017</div>  </div>
 </div>
 
 <div class="row no-gutter">
   <div class="col-md-7 col-lg-8 light lt v-b">
-    <div class="text-center p-a m-b-lg">
-      <h6 class="text-u-c">Global Goals for a Better World</h6>
-      <p class="text-muted"><em>2010 - 2015</em></p>
-    </div>
-    <div style="overflow: hidden">
-      <div style="margin: 0 -2px">
-        <div ui-jp="plot" ui-refresh="app.setting.color" ui-options="
-          [
-            { data: [[1, 3.6], [2, 3.5], [3, 6], [4, 4], [5, 4.3], [6, 3.5], [7, 3.6]], 
-              points: { show: true, radius: 0}, 
-              splines: { show: true, tension: 0.45, lineWidth: 0, fill: 0.8} 
-            },
-            { data: [[1, 3], [2, 2.6], [3, 3.2], [4, 3], [5, 3.5], [6, 3], [7, 3.5]], 
-              points: { show: true, radius: 0}, 
-              splines: { show: true, tension: 0.45, lineWidth: 0, fill: 1} 
-            }
-          ], 
-          {
-            colors: ['#0cc2aa','#0cc2aa'],
-            series: { shadowSize: 3 },
-            xaxis: { show: false, font: { color: '#ccc' }, position: 'bottom' },
-            yaxis:{ show: false, font: { color: '#ccc' }},
-            grid: { hoverable: true, clickable: true, borderWidth: 0, color: 'rgba(120,120,120,0.5)' },
-            tooltip: true,
-            tooltipOpts: { content: '%x.0 is %y.4',  defaultTheme: false, shifts: { x: 0, y: -40 } }
-          }
-        " style="height:140px" >
-        </div>
-      </div>
-    </div>
+   
     <div class="p-a-md primary">
       <div class="row">
         <div class="col-sm-4">
-          <h3 class="m-0 _600">98%</h3>
-          <span class="text-muted">School enrollment</span>
+          <h3 class="m-0 _600"><?php echo $total; ?></h3>
+          <span class="text-muted">Total Data</span>
         </div>
         <div class="col-sm-4">
-          <h3 class="m-0 _600">75%</h3>
-          <span class="text-muted">Financial Sector</span>
+          <h3 class="m-0 _600"><?php echo $ch; ?></h3>
+          <span class="text-muted">Data Curah Hujan</span>
         </div>
         <div class="col-sm-4">
-          <h3 class="m-0 _600">78%</h3>
-          <span class="text-muted">PMI</span>
+          <h3 class="m-0 _600"><?php echo $tma; ?></h3>
+          <span class="text-muted">Data Tinggi Muka Air</span>
         </div>
       </div>
     </div>
+      
+      <div class="p-a m-d-lg">
+        <center><video class='media-video' id='media-video' controls>
+             <source id="isivideo" src="http://media.bmkg.go.id/media/Rain_Forecast_24h.mp4" type="video/mp4">
+         </video></center>
+        <a class="btn btn-fw primary" onclick="cuaca('http://media.bmkg.go.id/media/Satellite_Indonesia.mp4')">Satelit</a>
+        <a class="btn btn-fw primary" onclick="cuaca('http://media.bmkg.go.id/media/Wind_Forecast_24h.mp4')">Angin</a>
+        <a class="btn btn-fw primary" onclick="cuaca('http://media.bmkg.go.id/media/Rain_Forecast_24h.mp4')">Hujan</a>
+        <a class="btn btn-fw primary" onclick="cuaca('http://media.bmkg.go.id/media/Radar_Indonesia.mp4')">Radar</a>
+        <a class="btn btn-fw primary" onclick="cuaca('http://media.bmkg.go.id/media/Cloud_Forecast_24h.mp4')">Awan</a>
+        <a class="btn btn-fw primary" onclick="cuaca('http://media.bmkg.go.id/media/City_Forecast_Tomorrow.mp4')">Cuaca</a>  
+      </div>
   </div>
   <div class="col-md-5 col-lg-4 white">
     <ul class="list inset m-0">
+        <?php foreach($pos->result() as $rows){ ?>
       <li class="list-item">
         <div class="list-left">
           <span ui-jp="sparkline" ui-refresh="app.setting.color" ui-options="[70,30], {type:'pie', height:40, sliceColors:['rgba(168,168,168,0.2)','#0cc2aa']}" class="sparkline inline"></span>
         </div>
         <div class="list-body">
-          <div><a href class="_600">Agriculture &amp; Rural Development</a></div>
-          <small class="text-muted">Rural population (4% of total population)</small>
+        <?php if ($rows->tipe=="RF") { ?>
+          <div><a href="ch?id=<?php echo $rows->id_pos; ?>" class="_600"><?php echo $rows->nama_pos; ?></a></div>         
+        <?php } else if ($rows->tipe=="WL") { ?>
+          <div><a href="tma?id=<?php echo $rows->id_pos; ?>"class="_600"><?php echo $rows->nama_pos; ?></a></div>
+        <?php } ?>
+          <small class="text-muted"><?php echo $rows->max_date; ?></small>
         </div>
       </li>
-      <li class="list-item">
-        <div class="list-left">
-          <span ui-jp="sparkline" ui-refresh="app.setting.color" ui-options="[90,10], {type:'pie', height:40, sliceColors:['rgba(168,168,168,0.2)','#a88add']}" class="sparkline inline"></span>
-        </div>
-        <div class="list-body">
-          <div><a href class="_600">Climate Change</a></div>
-          <small class="text-muted">CO2 emissions (21kt)</small>
-        </div>
-      </li>
-      <li class="list-item">
-        <div class="list-left">
-          <span ui-jp="sparkline" ui-refresh="app.setting.color" ui-options="[80,20], {type:'pie', height:40, sliceColors:['rgba(168,168,168,0.2)','#a88add']}" class="sparkline inline"></span>
-        </div>
-        <div class="list-body">
-          <div><a href class="_600">Economy &amp; Growth</a></div>
-          <small class="text-muted">Services, etc., value added (75% of GDP)</small>
-        </div>
-      </li>
-      <li class="list-item">
-        <div class="list-left">
-          <span ui-jp="sparkline" ui-refresh="app.setting.color" ui-options="[75,25], {type:'pie', height:40, sliceColors:['rgba(168,168,168,0.2)','#a88add']}" class="sparkline inline"></span>
-        </div>
-        <div class="list-body">
-          <div><a href class="_600">Education</a></div>
-          <small class="text-muted">School enrollment, primary (120% gross)</small>
-        </div>
-      </li>
-      <li class="list-item">
-        <div class="list-left">
-          <span ui-jp="sparkline" ui-refresh="app.setting.color" ui-options="[85,15], {type:'pie', height:40, sliceColors:['rgba(168,168,168,0.2)','#a88add']}" class="sparkline inline"></span>
-        </div>
-        <div class="list-body">
-          <div><a href class="_600">Financial Sector</a></div>
-          <small class="text-muted">Market capitalization of listed companies (45% of GDP)</small>
-        </div>
-      </li>
-      <li class="list-item">
-        <div class="list-left">
-          <span ui-jp="sparkline" ui-refresh="app.setting.color" ui-options="[85,15], {type:'pie', height:40, sliceColors:['rgba(168,168,168,0.2)','#a88add']}" class="sparkline inline"></span>
-        </div>
-        <div class="list-body">
-          <div><a href class="_600">Science &amp; Technology</a></div>
-          <small class="text-muted">Research and development expenditure (2.12% of GDP)</small>
-        </div>
-      </li>
+        <?php } ?>
     </ul>
   </div>
 </div>

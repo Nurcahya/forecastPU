@@ -10,7 +10,7 @@ $this->load->view('backend/tema/header');
           <h3>Grafik Tinggi Muka Air</h3>
         </div>
         <div class="box-body">              
-	<iframe SRC=<?php echo base_url('backend/tma/grafik/').$_GET['id'];?> width=100% height="330" frameBorder="0"></iframe>          
+	<iframe SRC=<?php echo base_url('backend/TMA/graflive/').$_GET['id'];?> width=100% height="330" frameBorder="0"></iframe>          
         </div>
       </div>
     </div>

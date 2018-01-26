@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="refresh" content="300">
         <title>Grafik</title>
         <script src="<?php echo base_url(); ?>assets/backend/jquery/jquery/dist/jquery.js"></script>
         

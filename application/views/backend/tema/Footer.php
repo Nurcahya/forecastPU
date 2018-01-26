@@ -1,7 +1,7 @@
 <!-- build:js scripts/app.html.js -->
 <!-- jQuery -->
 <script src="<?php echo base_url(); ?>assets/backend/jquery/jquery/dist/jquery.js"></script>
- <?php if ($link == 'video') { ?>
+ <?php if ($link == 'video' || $link == 'reader') { ?>
 <!--<script src="<?php echo base_url(); ?>assets/backend/jquery/datatables/media/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/backend/jquery/plugins/integration/bootstrap/3/dataTables.bootstrap.js"></script>-->
 <script>
@@ -35,6 +35,11 @@
         mediaPlayer.load();
         mediaPlayer.play();
     }
+     
+    function buka(x){
+        document.getElementById("isifile").src = "<?php echo site_url(); ?>/backend/reader/file?file=" + x;
+    }
+    
 </script>
     
  <?php } ?>
@@ -62,6 +67,24 @@
 <script src="<?php echo base_url(); ?>assets/backend/jquery/jquery-pjax/jquery.pjax.js"></script>
 <script src="<?php echo base_url(); ?>assets/backend/scripts/ajax.js"></script>
 
+<script src="<?php echo base_url(); ?>libs/jquery/datetimepicker/js/moment.js"></script>
+<script src="<?php echo base_url(); ?>libs/jquery/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript">
+            $(function () {
+                $('#datepicker').datetimepicker({
+                format: 'YYYY-MM-DD'
+            });
+            });
+            
+            
+            function cuaca(x){
+                document.getElementById("isivideo").src = x;
+                mediaPlayer = document.getElementById('media-video');
+                mediaPlayer.currentTime = 0;
+                mediaPlayer.load();
+                mediaPlayer.play();
+            }
+        </script>
 
 
 <!-- endbuild -->

@@ -17,23 +17,28 @@ html, body {
 
 .logo{
   position: absolute;
-  top: 9rem;
-  left: 8.5rem;
+  top: 7rem;
+  left: 11rem;
   width: 180px;
   height: 90px;
-  background: url(../gambar/sartika.jpg) no-repeat;
-    /*background: url(../gambar/pu.jpg) no-repeat;*/
+  background: url(../gambar/pu.jpg) no-repeat;
+    
 }
 .tulisan{
   position: absolute;
-  top: 21rem;
+  top: 18rem;
   width: 300px;
   height: 14px;
   color: white;
 }
 
 .tulisan h1{
-    font-size: 18pt;
+    font-size: 16pt;
+}
+
+.tulisan h2{
+    font-size: 12pt;
+    color: #f9cf00;
 }
 
 svg {

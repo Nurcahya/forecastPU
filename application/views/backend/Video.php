@@ -16,9 +16,9 @@ $this->load->view('backend/tema/Header');
 
 <iframe width="760" height="480" src="https://www.youtube.com/embed/jTQLYeXlxd8" frameborder="0" allowfullscreen></iframe>
 
-                        <center><video class='media-video' id='media-video' controls>
+<!--                        <center><video class='media-video' id='media-video' controls>
                                 <source id='isivideo' src=<?php echo base_url(); ?>assets/video/gin.MP4 type='video/mp4'>
-                            </video></center>
+                            </video></center>-->
                     </div>	
                 </div>
             </div>

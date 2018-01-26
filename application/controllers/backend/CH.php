@@ -32,6 +32,7 @@ class CH extends CI_Controller {
         $crud->set_table('curah_hujan');
         $crud->set_subject('Curah Hujan');
         $crud->where('curah_hujan.id_pos',$id);
+        $crud->order_by('waktu','desc');
         $crud->set_relation('id_pos', 'pos', 'nama_pos');
         $crud->unset_add();
         $output = $crud->render();
@@ -46,12 +47,23 @@ class CH extends CI_Controller {
         $this->load->view('backend/grafik/CH',$data);
     }
 
-    function graflive(){
+    function graflive() {
         $id = $this->uri->segment(4);
-        $data['namapos']=$this->datamodel->get_detailpos($id);
-        $data['item']=$this->datamodel->get_ch($id);
-        $this->load->view('backend/grafik/live',$data);
+        $data['namapos'] = $this->datamodel->get_detailpos($id);
+        $this->load->view('backend/grafik/CHLive', $data);
     }
+
+    function datalive() {
+        $id = $this->uri->segment(4);
+        $item = $this->datamodel->get_ch($id);
+        $arraydata = array();
+        foreach ($item->result() as $itemnya) {
+            $time = strtotime($itemnya->waktu . "+8hours") * 1000;
+            $arraydata[] = [$time, floatval($itemnya->curah_hujan)];
+        }
+        echo(json_encode($arraydata));
+    }
+
 }
 
 ?>
