@@ -33,5 +33,16 @@ class Adminmodel extends CI_Model {
     function get_vid() {
         return $this->db->get('video')->result();
     }
+    
+    function simpan($username, $pass) {
+        $data = array(
+            'id_admin' => '',
+            'username' => $username,
+            'password' => md5($pass),
+            'last_login'=> date("Y-m-d H:i:s"),
+            'hak_akses' => "admin"
+        );
+        $this->db->insert('admin', $data);
+    }
 
 }

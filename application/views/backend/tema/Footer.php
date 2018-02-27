@@ -1,7 +1,7 @@
 <!-- build:js scripts/app.html.js -->
 <!-- jQuery -->
 <script src="<?php echo base_url(); ?>assets/backend/jquery/jquery/dist/jquery.js"></script>
- <?php if ($link == 'video' || $link == 'reader') { ?>
+ <?php if ($link == 'video' || $link == 'reader' || $link=='tutorial') { ?>
 <!--<script src="<?php echo base_url(); ?>assets/backend/jquery/datatables/media/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/backend/jquery/plugins/integration/bootstrap/3/dataTables.bootstrap.js"></script>-->
 <script>
@@ -40,6 +40,11 @@
         document.getElementById("isifile").src = "<?php echo site_url(); ?>/backend/reader/file?file=" + x;
     }
     
+    
+    function bukamanual(x){
+        document.getElementById("isimanual").src = "<?php echo site_url(); ?>/libs/pdf/" + x;
+    }
+    
 </script>
     
  <?php } ?>
@@ -72,6 +77,12 @@
 <script type="text/javascript">
             $(function () {
                 $('#datepicker').datetimepicker({
+                format: 'YYYY-MM-DD'
+            });
+            });
+            
+            $(function () {
+                $('#datepicker2').datetimepicker({
                 format: 'YYYY-MM-DD'
             });
             });

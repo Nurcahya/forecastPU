@@ -22,6 +22,11 @@ class Datamodel extends CI_Model {
         return $query;
     }
     
+    function get_latest_tma_map(){
+        $query=$this->db->query("SELECT * FROM tma a INNER JOIN ( SELECT *, MAX(waktu) max_date FROM tma INNER JOIN pos USING (id_pos) GROUP BY id_pos ) b ON a.id_pos= b.id_pos AND a.waktu = b.max_date INNER JOIN batas WHERE a.id_pos=batas.id_pos ORDER BY `a`.`id_pos` ASC ");
+        return $query;
+    }
+    
     function get_jum_ch() {
         $query = $this->db->query("SELECT count(id_sensor) jum FROM `logsensor` INNER JOIN pos WHERE logsensor.id_sensor=pos.id_pos AND pos.tipe='RF'");
         return $query->row()->jum;
@@ -34,6 +39,31 @@ class Datamodel extends CI_Model {
 
     function get_TMA($id) {
         $query = $this->db->query("select * from (select * from tma where id_pos = '".$id."'  order by waktu desc) a order by a.waktu asc");
+        return $query;
+    }
+    
+    function get_TMA_harian($id){
+        $query = $this->db->query("SELECT COUNT( id_tma ) AS total, SUM( tma ) AS nilai, DATE( waktu ) as waktu FROM tma WHERE id_pos =  '".$id."' GROUP BY DATE( waktu ) order by waktu desc");
+        return $query;
+    }
+
+    function get_TMA_bulanan($id){
+        $query = $this->db->query("SELECT COUNT( id_tma ) AS total, SUM( tma ) AS nilai, DATE( waktu ) as waktu FROM tma WHERE id_pos =  '".$id."' GROUP BY MONTH( waktu ) order by waktu desc");
+        return $query;
+    }
+    
+    function get_TD($id) {
+        $query = $this->db->query("select * from (select * from turbidity where id_pos = '".$id."'  order by waktu desc) a order by a.waktu asc");
+        return $query;
+    }
+    
+    function get_TD_harian($id){
+        $query = $this->db->query("SELECT COUNT( id_turbidity ) AS total, SUM( nilai ) AS nilai, DATE( waktu ) as waktu FROM turbidity WHERE id_pos =  '".$id."' GROUP BY DATE( waktu ) order by waktu desc");
+        return $query;
+    }
+
+    function get_TD_bulanan($id){
+        $query = $this->db->query("SELECT COUNT( id_turbidity ) AS total, SUM( nilai ) AS nilai, DATE( waktu ) as waktu FROM turbidity WHERE id_pos =  '".$id."' GROUP BY MONTH( waktu ) order by waktu desc");
         return $query;
     }
 
@@ -50,7 +80,17 @@ class Datamodel extends CI_Model {
         $query = $this->db->query("select * from (select * from curah_hujan where id_pos = '".$id."'  order by waktu desc) a order by a.waktu asc");
         return $query;
     }
+    
+    function get_CH_harian($id){
+        $query = $this->db->query("SELECT COUNT( id_curah ) AS total, SUM( curah_hujan ) AS nilai, DATE( waktu ) as waktu FROM curah_hujan WHERE id_pos =  '".$id."' GROUP BY DATE( waktu ) order by waktu desc");
+        return $query;
+    }
 
+    function get_CH_bulanan($id){
+        $query = $this->db->query("SELECT COUNT( id_curah ) AS total, SUM( curah_hujan ) AS nilai, date( waktu ) as waktu FROM curah_hujan WHERE id_pos =  '".$id."' GROUP BY MONTH( waktu ) order by waktu desc");
+        return $query;
+    }
+    
     function get_citra_cetak($id, $tanggal) {
       $query = $this->db->query("select * from citra inner join pos using (id_pos) where citra.id_pos = '".$id."' and date(waktu) = '".$tanggal."'  ");
        return $query->result();
@@ -66,6 +106,16 @@ class Datamodel extends CI_Model {
             'id_log_sensor' => '',
             'id_sensor' => $ksens,
             'waktu' => $waktu
+        );
+        $this->db->insert('logsensor', $data);
+    } 
+    
+    function insert_sensor2($ksens, $waktu, $teg) {
+        $data = array(
+            'id_log_sensor' => '',
+            'id_sensor' => $ksens,
+            'waktu' => $waktu,
+            'tegangan' => $teg
         );
         $this->db->insert('logsensor', $data);
     }
@@ -88,6 +138,16 @@ class Datamodel extends CI_Model {
             'waktu' => $waktu
         );
         $this->db->insert('curah_hujan', $data);
+    }
+    
+    function insert_td($id, $td, $waktu) {
+        $data = array(
+            'id_turbidity'=>'',
+            'id_pos' => $id,
+            'nilai' => $td,
+            'waktu' => $waktu
+        );
+        $this->db->insert('turbidity', $data);
     }
     
     function insert_video($id, $judul, $waktu) {

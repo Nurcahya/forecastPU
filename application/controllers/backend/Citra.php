@@ -24,6 +24,15 @@ class Citra extends CI_Controller {
             $this->load->view('backend/Citra',$data);
         }
     }
+    
+        public function citra(){
+        if ($this->session->userdata('username') == '') {
+            redirect(base_url());
+        } else {
+            redirect('backend/citra?id=1','refresh');
+        }
+    }
+    
     public function cetak() {
         if ($this->session->userdata('username') == '') {
             redirect(base_url());

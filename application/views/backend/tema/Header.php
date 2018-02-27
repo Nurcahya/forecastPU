@@ -67,10 +67,9 @@
                                         <span class="nav-text">Lokasi Pos</span>
                                     </a>
                                 </li>
-
                                 
                                 <li>
-                                    <a href='<?php echo site_url('backend/ch?id=1') ?>'>
+                                    <a href='<?php echo site_url('backend/CH/CH') ?>'>
                                         <span class="nav-icon">
                                             <i class="material-icons">&#xe1b8;</i>
                                         </span>
@@ -79,7 +78,7 @@
                                 </li>
 
                                 <li>
-                                    <a href='<?php echo site_url('backend/tma?id=6') ?>'>
+                                    <a href='<?php echo site_url('backend/TMA/TMA') ?>'>
                                         <span class="nav-icon">
                                             <i class="material-icons">&#xe1b8;</i>
                                         </span>
@@ -87,9 +86,17 @@
                                     </a>
                                 </li>
 
+                                <li>
+                                    <a href='<?php echo site_url('backend/turbidity/turbidity') ?>'>
+                                        <span class="nav-icon">
+                                            <i class="material-icons">&#xe1b8;</i>
+                                        </span>
+                                        <span class="nav-text">Riwayat Turbidity</span>
+                                    </a>
+                                </li>
                                 
                                 <li>
-                                    <a href='<?php echo site_url('backend/citra?id=1') ?>'>
+                                    <a href='<?php echo site_url('backend/citra/citra') ?>'>
                                         <span class="nav-icon">
                                             <i class="material-icons">&#xe3f4;</i>
                                         </span>
@@ -107,7 +114,7 @@
                                 </li>
 
                                 <li>
-                                    <a href='<?php echo site_url('backend/reader') ?>' >
+                                    <a href='<?php echo site_url('backend/reader/reader') ?>' >
                                         <span class="nav-icon">
                                             <i class="material-icons">&#xe85d;</i>
                                         </span>
@@ -115,15 +122,24 @@
                                     </a>
                                 </li>
                                 
-                                <li>
-                                    <a href='<?php echo site_url('backend/video/cctv') ?>' >
+<!--                                <li>
+                                    <a href='<?php echo site_url('backend/video') ?>' >
                                         <span class="nav-icon">
                                             <i class="material-icons">&#xe63a;</i>
                                         </span>
                                         <span class="nav-text">Video</span>
                                     </a>
-                                </li>
+                                </li>-->
 
+                                <li>
+                                    <a href='<?php echo site_url('backend/tutorial/tutorial') ?>'>
+                                        <span class="nav-icon">
+                                            <i class="material-icons">&#xe431;</i>
+                                        </span>
+                                        <span class="nav-text">Manual Book</span>
+                                    </a>
+                                </li>
+                                
                                 <li>
                                     <a href='<?php echo site_url('backend/about') ?>'>
                                         <span class="nav-icon">
@@ -144,9 +160,7 @@
                 <div class="app-header white box-shadow">
                     <div class="navbar navbar-toggleable-sm flex-row align-items-center">
                         <!-- Open side - Naviation on mobile -->
-                        <a data-toggle="modal" data-target="#aside" class="hidden-lg-up mr-3">
-                            <i class="material-icons">&#xe5d2;</i>
-                        </a>
+                        
                         <!-- / -->
 
                         <!-- Page title - Bind to $state's title -->
@@ -178,7 +192,7 @@
                 <div class="app-footer">
                     <div class="p-2 text-xs">
                         <div class="pull-right text-muted py-1">
-                            &copy; Copyright <strong><a href='http://sartika-ms.com'>Sartika Mitrasejati</a></strong> <span class="hidden-xs-down"> - 2017</span>
+                            &copy; Copyright <strong><a href='http://sartika-ms.com'>Sartika Mitrasejati</a></strong> <span class="hidden-xs-down"> - <?php echo date("Y"); ?> </span>
                         </div>
                         <div class="nav">
                             <a class="nav-link" href="http://about.me/nurcahyapradana">Developed by : Nurcahya P.T.P</a>

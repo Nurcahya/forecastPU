@@ -25,7 +25,7 @@ class Video extends CI_Controller {
         }
     }
     
-    public function cctv(){
+    public function CH(){
             if ($this->session->userdata('username') == '') {
             redirect(base_url());
         } else {

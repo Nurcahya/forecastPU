@@ -23,6 +23,15 @@ class Reader extends CI_Controller {
         }
     }
     
+    
+        public function reader(){
+        if ($this->session->userdata('username') == '') {
+            redirect(base_url());
+        } else {
+            redirect('backend/reader','refresh');
+        }
+    }
+    
     public function file() {
         if ($this->session->userdata('username') == '') {
             redirect(base_url());

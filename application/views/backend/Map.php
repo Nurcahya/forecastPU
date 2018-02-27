@@ -39,7 +39,7 @@
 
         <?php
         $con = mysqli_connect("localhost", "root", "", "forecast");
-        $sql = "SELECT * FROM pos";
+        $sql = "SELECT `id_pos`, `nama_pos`, `long`, `lat`, `alamat`, `id_sensor`, sensor.tipe FROM pos INNER JOIN sensor USING (id_pos)";
         $result = mysqli_query($con, $sql);
         $pos = array();
         $no = 0;
@@ -104,22 +104,15 @@
 
                 var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
                 var icons = {
-                    kosong: {
-                        name: 'Kosong',
-                        icon: '<?php echo base_url(); ?>assets/backend/gambar/map/logotrans.png'
-                    },
                     WL: {
-                        name: 'TMA Normal',
+                        name: 'Tinggi Muka Air',
                         //icon: iconBase + 'library_maps.png'
                         icon: '<?php echo base_url(); ?>assets/backend/gambar/map/awlr_siaga1.png'
                     },
-                    siaga: {
-                        name: 'TMA Siaga',
-                        icon: '<?php echo base_url(); ?>assets/backend/gambar/map/awlr_siaga2.png'
-                    },
-                    bahaya: {
-                        name: 'TMA Bahaya',
-                        icon: '<?php echo base_url(); ?>assets/backend/gambar/map/awlr_siaga3.png'
+                    TD: {
+                        name: 'Kekeruhan Air',
+                        //icon: iconBase + 'library_maps.png'
+                        icon: '<?php echo base_url(); ?>assets/backend/gambar/map/logotrans.png'
                     },
                     RF: {
                         name: 'Curah Hujan',
@@ -157,13 +150,7 @@
                         WL: {
                             icon: '<?php echo base_url(); ?>assets/backend/gambar/map/awlr_siaga1.png'
                         },
-                        siaga: {
-                            icon: '<?php echo base_url(); ?>assets/backend/gambar/map/awlr_siaga2.png'
-                        },
-                        bahaya: {
-                            icon: '<?php echo base_url(); ?>assets/backend/gambar/map/awlr_siaga3.png'
-                        },
-                        kosong: {
+                        TD: {
                             icon: '<?php echo base_url(); ?>assets/backend/gambar/map/logotrans.png'
                         },
                         RF: {
@@ -236,6 +223,7 @@
             <input type="button" value="Semua Tipe" onclick="filterMarkers('')"></input>
             <input type="button" value="Rainfall Station" onclick="filterMarkers('RF')"></input>
             <input type="button" value="Water Level Station" onclick="filterMarkers('WL')"></input>
+            <input type="button" value="Turbidity Station" onclick="filterMarkers('TD')"></input>
         </div>
 
         <div id="map-canvas"></div>

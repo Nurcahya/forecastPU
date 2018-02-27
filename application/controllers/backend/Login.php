@@ -52,6 +52,25 @@ class Login extends CI_Controller {
         redirect(base_url());
     }
 
+    function registrasi()
+    {
+            $this->load->view('backend/registrasi');
+    }
+    
+    function simpan(){
+      $data = (array)json_decode(file_get_contents('php://input'));
+
+                        //Simpan data ke mysql
+   $val=array(
+    'username' => $data['username'],
+    'password' => $data['password'],
+    'jk' => $data['jk'],
+    'alamat' => $data['alamat']
+   );
+   
+    $this->adminmodel->simpan($data['username'],$data['password']);
+echo "<script type='text/javascript'>alert('wakokwao');</script>";
+  }
 }
 
 /* End of file welcome.php */

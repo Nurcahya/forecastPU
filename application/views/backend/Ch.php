@@ -10,7 +10,13 @@ $this->load->view('backend/tema/header');
           <h3>Grafik Curah Hujan</h3>
         </div>
         <div class="box-body">              
+         <?php if($_GET['kat']=='harian') { ?>
+	<iframe SRC=<?php echo base_url('backend/CH/graflive2/').$_GET['id'];?> width=100% height="330" frameBorder="0"></iframe>          
+         <?php } else if($_GET['kat']=='bulanan') { ?>
+	<iframe SRC=<?php echo base_url('backend/CH/graflive3/').$_GET['id'];?> width=100% height="330" frameBorder="0"></iframe>          
+         <?php } else { ?> 
 	<iframe SRC=<?php echo base_url('backend/CH/graflive/').$_GET['id'];?> width=100% height="330" frameBorder="0"></iframe>          
+         <?php } ?>
         </div>
       </div>
     </div>
@@ -27,10 +33,22 @@ $this->load->view('backend/tema/header');
                         <button class="btn white dropdown-toggle" data-toggle="dropdown" id="judul" >Daftar Pos</button>
                         <div class="dropdown-menu dropdown-menu-scale"  id="pos">
                             <?php foreach ($pos as $itempos) { ?>
-                               <a class="dropdown-item" id='item' href="<?php echo site_url('backend/ch?id=').$itempos->id_pos ?>"><?php echo $itempos->nama_pos; ?></a>                                
+                               <a class="dropdown-item" id='item' href="<?php echo site_url('backend/ch?kat=10&id=').$itempos->id_pos ?>"><?php echo $itempos->nama_pos; ?></a>                                
                             <?php } ?>
                         </div>
                     </div>
+                </div>
+            </div>
+        
+        
+            <div class="box">
+                <div class="box-header accent">
+                    <h3>Kategori</h3>
+                </div>
+                <div class="box-body">
+                    <a class="md-btn md-raised m-b-sm w-xs blue" href="<?php echo site_url('backend/ch?kat=10&id=').$_GET['id'] ?>">10 Menit</a>
+                    <a class="md-btn md-raised m-b-sm w-xs blue" href="<?php echo site_url('backend/ch?kat=harian&id=').$_GET['id'] ?>">Harian</a>
+                    <a class="md-btn md-raised m-b-sm w-xs blue" href="<?php echo site_url('backend/ch?kat=bulanan&id=').$_GET['id'] ?>">Bulanan</a>
                 </div>
             </div>
         </div>
@@ -43,8 +61,29 @@ $this->load->view('backend/tema/header');
           <h3>Tabel Curah Hujan</h3>
           <small>Riwayat Seluruh Curah Hujan</small>
         </div>
-        <div class="box-body">              
-	<iframe SRC=<?php echo base_url('backend/ch/grid/').$_GET['id'];?> width=100% height="500" frameBorder="0"></iframe>          
+        <div class="box-body">      
+         <?php if($_GET['kat']=='harian') { ?>
+            <iframe SRC=<?php echo base_url('backend/ch/grid2/').$_GET['id'];?> width=100% height="500" frameBorder="0"></iframe>          
+         <?php } else if($_GET['kat']=='bulanan') { ?>
+            <iframe SRC=<?php echo base_url('backend/ch/grid3/').$_GET['id'];?> width=100% height="500" frameBorder="0"></iframe>          
+         <?php } else { ?> 
+               <form action="<?php echo site_url();?>backend/CH/createSess/<?php echo $_GET['id']; ?>" method="post" target="frametabel">
+                <div class='form-group'>
+                    <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
+                    
+                            <table border="0" width="50%">
+                                <tr>
+                                <td><p>Tanggal Mulai: <input type="text" name="tglmulai" id="datepicker"></p></td>
+                                <td><p>Tanggal Berakhir: <input type="text" name="tglakhir" id="datepicker2"></p></td>
+                                <td><input type="submit" value="Filter" class="btn-primary"></td>
+                                <td><a href="<?php echo site_url();?>backend/CH/grid/<?php echo $_GET['id']; ?>" target="frametabel"><input type="button" value="Reset Filter" class="btn-secondary"></a></td>
+                            </table>
+                    
+                </div>
+                </form>
+            <iframe name="frametabel" SRC=<?php echo base_url('backend/ch/grid/').$_GET['id'];?> width=100% height="500" frameBorder="0"></iframe>          
+         <?php } ?>
+        
         </div>
       </div>
     </div>
