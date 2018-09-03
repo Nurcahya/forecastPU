@@ -154,6 +154,47 @@ class Turbidity extends CI_Controller {
     function _callback_waktu_bulanan($value, $row) {
         return date("F Y", strtotime(str_replace('/', '-', substr($row->waktu,0,10))));
     }
+    
+    function grid4() {
+        $crud = new grocery_CRUD();
+//               $crud->set_theme('datatables');
+        $id = $this->uri->segment(4);
+        $crud->set_table('turbidity');
+        $crud->columns(array('id_pos', 'total', 'nilai', 'waktu' ));
+        $crud->callback_column('nilai',array($this,'_callback_nilai_jam'));
+        $crud->callback_column('total',array($this,'_callback_total_jam'));
+        $crud->callback_column('waktu',array($this,'_callback_waktu_jam'));
+        $where = 'turbidity.id_pos = '.$id.' GROUP BY HOUR(waktu), DATE( waktu ) ORDER BY waktu DESC';
+        $crud->where($where);
+        $crud->set_relation('id_pos', 'pos', 'nama_pos');
+        $crud->unset_add();
+        $crud->unset_edit();
+        $crud->unset_delete();
+//        $crud->unset_operations();
+        $output = $crud->render();
+        $this->load->view('backend/Grid', $output);
+    }
+
+    function _callback_nilai_jam($value, $row){
+        $this->load->database();
+        $tgl = date("Y-m-d", strtotime(str_replace('/', '-', substr($row->waktu,0,10))));
+        $jam = date("H", strtotime($row->waktu));
+        $sql = $this->db->query("select  count( id_turbidity ) AS pembagi, SUM( nilai ) AS nilai, waktu as tanggal FROM turbidity WHERE id_pos = '".$row->id_pos."' and DATE(waktu)='".$tgl."' and HOUR(waktu)='".$jam."' GROUP BY DATE( waktu )");
+        $nilai = $sql->row_array(); 
+        return number_format(($nilai['nilai']/$nilai['pembagi']),2);
+    }
+    
+    function _callback_total_jam($value, $row){
+        $this->load->database();
+        $tgl = date("Y-m-d", strtotime(str_replace('/', '-', substr($row->waktu,0,10))));
+        $jam = date("H", strtotime($row->waktu));
+        $sql = $this->db->query("select count( id_turbidity ) AS total, waktu as tanggal FROM turbidity WHERE id_pos = '".$row->id_pos."' and DATE(waktu)='".$tgl."' and HOUR(waktu)='".$jam."' GROUP BY DATE( waktu )");
+        $nilai = $sql->row_array(); 
+        return $nilai['total']." data";
+    }
+    function _callback_waktu_jam($value, $row) {
+        return date("d F Y H:00", strtotime($row->waktu));
+    }
         
     function grafik() {
         $id = $this->uri->segment(4);
@@ -179,6 +220,12 @@ class Turbidity extends CI_Controller {
         $data['namapos'] = $this->datamodel->get_detailpos($id);
         $this->load->view('backend/grafik/TDLive3', $data);
     }
+    
+    function graflive4() {
+        $id = $this->uri->segment(4);
+        $data['namapos'] = $this->datamodel->get_detailpos($id);
+        $this->load->view('backend/grafik/TDLive4', $data);
+    }    
 
     function datalive() {
         $id = $this->uri->segment(4);
@@ -205,6 +252,19 @@ class Turbidity extends CI_Controller {
     function datalive3() {
         $id = $this->uri->segment(4);
         $item = $this->datamodel->get_TD_bulanan($id);
+        $arraydata = array();
+        foreach ($item->result() as $itemnya) {
+//            $tgl = date("Y-m-d 00:00:00", strtotime($itemnya->waktu));
+//            echo $tgl;
+            $time = strtotime($itemnya->waktu . "+8hours") * 1000;
+            $arraydata[] = [$time, floatval($itemnya->nilai/$itemnya->total)];
+        }
+        echo(json_encode($arraydata));
+    }
+    
+    function datalive4() {
+        $id = $this->uri->segment(4);
+        $item = $this->datamodel->get_TD_jam($id);
         $arraydata = array();
         foreach ($item->result() as $itemnya) {
 //            $tgl = date("Y-m-d 00:00:00", strtotime($itemnya->waktu));

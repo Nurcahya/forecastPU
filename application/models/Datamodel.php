@@ -43,12 +43,17 @@ class Datamodel extends CI_Model {
     }
     
     function get_TMA_harian($id){
-        $query = $this->db->query("SELECT COUNT( id_tma ) AS total, SUM( tma ) AS nilai, DATE( waktu ) as waktu FROM tma WHERE id_pos =  '".$id."' GROUP BY DATE( waktu ) order by waktu desc");
+        $query = $this->db->query("SELECT * FROM (SELECT COUNT( id_tma ) AS total, SUM( tma ) AS nilai, DATE( waktu ) as waktu FROM tma WHERE id_pos =  '".$id."' GROUP BY DATE( waktu ) order by waktu desc) x order by x.waktu asc");
         return $query;
     }
 
     function get_TMA_bulanan($id){
-        $query = $this->db->query("SELECT COUNT( id_tma ) AS total, SUM( tma ) AS nilai, DATE( waktu ) as waktu FROM tma WHERE id_pos =  '".$id."' GROUP BY MONTH( waktu ) order by waktu desc");
+        $query = $this->db->query("SELECT * FROM (SELECT COUNT( id_tma ) AS total, SUM( tma ) AS nilai, DATE( waktu ) as waktu FROM tma WHERE id_pos =  '".$id."' GROUP BY MONTH( waktu ) order by waktu desc) x order by x.waktu asc");
+        return $query;
+    }
+    
+    function get_TMA_jam($id){
+        $query = $this->db->query("SELECT * FROM (SELECT COUNT( id_tma) AS total, SUM( tma ) AS nilai, waktu FROM tma WHERE id_pos =  '".$id."' GROUP BY HOUR( waktu ),date(waktu) order by waktu desc) x order by x.waktu asc");
         return $query;
     }
     
@@ -58,14 +63,20 @@ class Datamodel extends CI_Model {
     }
     
     function get_TD_harian($id){
-        $query = $this->db->query("SELECT COUNT( id_turbidity ) AS total, SUM( nilai ) AS nilai, DATE( waktu ) as waktu FROM turbidity WHERE id_pos =  '".$id."' GROUP BY DATE( waktu ) order by waktu desc");
+        $query = $this->db->query("SELECT * FROM (SELECT COUNT( id_turbidity ) AS total, SUM( nilai ) AS nilai, DATE( waktu ) as waktu FROM turbidity WHERE id_pos =  '".$id."' GROUP BY DATE( waktu ) order by waktu desc) x order by x.waktu asc");
         return $query;
     }
 
     function get_TD_bulanan($id){
-        $query = $this->db->query("SELECT COUNT( id_turbidity ) AS total, SUM( nilai ) AS nilai, DATE( waktu ) as waktu FROM turbidity WHERE id_pos =  '".$id."' GROUP BY MONTH( waktu ) order by waktu desc");
+        $query = $this->db->query("SELECT * FROM (SELECT COUNT( id_turbidity ) AS total, SUM( nilai ) AS nilai, DATE( waktu ) as waktu FROM turbidity WHERE id_pos =  '".$id."' GROUP BY MONTH( waktu ) order by waktu desc) x order by x.waktu asc");
         return $query;
     }
+
+    function get_TD_jam($id){
+        $query = $this->db->query("SELECT * FROM (SELECT COUNT( id_turbidity ) AS total, SUM( nilai ) AS nilai, waktu FROM turbidity WHERE id_pos =  '".$id."' GROUP BY HOUR( waktu ),date(waktu) order by waktu desc) x order by x.waktu asc");
+        return $query;
+    }
+    
 
     function update_kamera($id){
         $data = array(
@@ -82,12 +93,17 @@ class Datamodel extends CI_Model {
     }
     
     function get_CH_harian($id){
-        $query = $this->db->query("SELECT COUNT( id_curah ) AS total, SUM( curah_hujan ) AS nilai, DATE( waktu ) as waktu FROM curah_hujan WHERE id_pos =  '".$id."' GROUP BY DATE( waktu ) order by waktu desc");
+        $query = $this->db->query("SELECT * FROM (SELECT COUNT( id_curah ) AS total, SUM( curah_hujan ) AS nilai, DATE( waktu ) as waktu FROM curah_hujan WHERE id_pos =  '".$id."' GROUP BY DATE( waktu ) order by waktu desc) x order by x.waktu asc");
         return $query;
     }
 
     function get_CH_bulanan($id){
-        $query = $this->db->query("SELECT COUNT( id_curah ) AS total, SUM( curah_hujan ) AS nilai, date( waktu ) as waktu FROM curah_hujan WHERE id_pos =  '".$id."' GROUP BY MONTH( waktu ) order by waktu desc");
+        $query = $this->db->query("SELECT * FROM (SELECT COUNT( id_curah ) AS total, SUM( curah_hujan ) AS nilai, date( waktu ) as waktu FROM curah_hujan WHERE id_pos =  '".$id."' GROUP BY MONTH( waktu ) order by waktu desc) x order by x.waktu asc");
+        return $query;
+    }
+
+    function get_CH_jam($id){
+        $query = $this->db->query("SELECT * FROM (SELECT COUNT( id_curah ) AS total, SUM( curah_hujan ) AS nilai, waktu FROM curah_hujan WHERE id_pos =  '".$id."' GROUP BY HOUR( waktu ),date(waktu) order by waktu desc) x order by x.waktu asc");
         return $query;
     }
     
@@ -116,6 +132,17 @@ class Datamodel extends CI_Model {
             'id_sensor' => $ksens,
             'waktu' => $waktu,
             'tegangan' => $teg
+        );
+        $this->db->insert('logsensor', $data);
+    }
+       
+    function insert_sensor3($ksens, $waktu, $teg, $kode) {
+        $data = array(
+            'id_log_sensor' => '',
+            'id_sensor' => $ksens,
+            'waktu' => $waktu,
+            'tegangan' => $teg,
+            'kode' => $kode
         );
         $this->db->insert('logsensor', $data);
     }

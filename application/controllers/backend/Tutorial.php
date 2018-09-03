@@ -22,7 +22,7 @@ class Tutorial extends CI_Controller {
     
     
     
-        public function tutorial(){
+    public function tutorial(){
         if ($this->session->userdata('username') == '') {
             redirect(base_url());
         } else {

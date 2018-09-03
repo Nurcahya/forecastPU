@@ -35,6 +35,22 @@
                 <textarea class="form-control" ng-model="alamat"></textarea><br>
                 <input type="button" class="btn btn-primary" ng-click="insert_data()" value="SUBMIT">
             </form>
+        
+            
+            <table border="1">
+                <tr>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Last Login</th>
+                </tr>
+
+                <!-- Display records -->
+                <tr ng-repeat="user in users">
+                <td>{{user.username}}</td>
+                <td>{{user.password}}</td>
+                <td>{{user.last_login}}</td>
+                </tr>
+            </table>
         </div>
 
         <script>
@@ -43,9 +59,11 @@
                 // $scope.insert_data => insert_data merupakan nama dari ng-click pada tombol submit
                 $scope.insert_data = function () {
                     $http.post("<?php echo site_url('backend/login/simpan'); ?>", {'username': $scope.username, 'password': $scope.password, 'jk': $scope.jk, 'alamat': $scope.alamat}).success(function (data, status, headers, config) {
-                        //Beritahu jika data sudah berhasil di input
-                       // alert("Data Berhasil Di Input");
                     });
+                    $http({ method: 'get', url: '<?php echo site_url()."backend/login/get/" ?>'}).then(function successCallback(response) {
+                    $scope.users = response.data;
+//                    alert($scope.users);
+               });
                 };
                  $scope.$watch('jk',function(){
                     if($scope.jk=='L'){
@@ -54,7 +72,11 @@
                         $scope.titel="Nyonya ";
                     }
                 });
-
+                $http({ method: 'get', url: '<?php echo site_url()."backend/login/get/" ?>'}).then(function successCallback(response) {
+                    $scope.users = response.data;
+//                    alert($scope.users);
+               });
+                
             });
         </script>
     </body>

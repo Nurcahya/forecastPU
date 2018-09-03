@@ -71,6 +71,47 @@ class Service extends CI_Controller {
         $waktu = date("Y-m-d H:i:s");
         echo $waktu;
     }
-    
 
+    public function CSV(){
+        $this->load->view('service/CSV');        
+    }
+
+    public function insertCSV()
+    {
+        $ksens = $_POST['ksens'];
+        $tipe = $_POST['tipe'];
+        foreach ($_FILES['csv']['tmp_name'] as $f => $name) { 
+            $file = fopen($_FILES["csv"]["tmp_name"][$f], 'r');
+            $row = 1;
+            if (($handle = $file) !== FALSE) {
+                while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                    $num = count($data);
+                    $row++;
+                    $nama=$_FILES["csv"]["name"][$f];
+                    $hari = substr($nama, 11, 2);
+                    $bulan = substr($nama, 9, 2);
+                    $tahun = substr($nama, 5, 4);
+                    $jam = $data[0].":00";
+                    $waktu = $tahun."-".$bulan."-".$hari." ".$jam;
+
+                    if ($tipe == 'TMA'){
+                    $nilai = $data[1];
+                    $ks = $ksens;
+                    $this->datamodel->insert_sensor($ks,$waktu);
+                    $this->servicemodel->insert_tma($ks,$nilai,$waktu);
+                    }
+
+                    else if ($tipe == 'CH'){
+                    $nilai = $data[1];
+                    $ks = $ksens;
+                    $this->datamodel->insert_sensor($ks,$waktu);
+                    $this->servicemodel->insert_ch($ks,$nilai,$waktu);
+                    }
+                    // echo $ks." ".$nilai." ".$waktu;
+                }
+           // fclose($handle);
+            }  
+        } 
+         redirect('service/csv');
+    }       
 }

@@ -24,7 +24,9 @@ class Insert extends CI_Controller {
     $nilai = $_GET['nilai'];
     $waktu = $_GET['waktu'];
     $ksens =  $_GET['ksens'];
-    if(isset($_GET['teg'])){
+    if(isset($_GET['teg'])&&isset($_GET['kode'])){
+        $this->datamodel->insert_sensor3($ksens,$waktu,$_GET['teg'], $_GET['kode']);        
+    } else if(isset($_GET['teg'])){
         $this->datamodel->insert_sensor2($ksens,$waktu,$_GET['teg']);
     } else {
         $this->datamodel->insert_sensor($ksens,$waktu);        
@@ -42,7 +44,9 @@ class Insert extends CI_Controller {
     $nilai = $_GET['nilai'];
     $waktu = $_GET['waktu'];
     $ksens =  $_GET['ksens'];
-    if(isset($_GET['teg'])){
+    if(isset($_GET['teg'])&&isset($_GET['kode'])){
+        $this->datamodel->insert_sensor3($ksens,$waktu,$_GET['teg'], $_GET['kode']);        
+    } else if(isset($_GET['teg'])){
         $this->datamodel->insert_sensor2($ksens,$waktu,$_GET['teg']);
     } else {
         $this->datamodel->insert_sensor($ksens,$waktu);        
@@ -60,7 +64,9 @@ class Insert extends CI_Controller {
     $nilai = $_GET['nilai'];
     $waktu = $_GET['waktu'];
     $ksens =  $_GET['ksens'];
-    if(isset($_GET['teg'])){
+    if(isset($_GET['teg'])&&isset($_GET['kode'])){
+        $this->datamodel->insert_sensor3($ksens,$waktu,$_GET['teg'], $_GET['kode']);        
+    } else if(isset($_GET['teg'])){
         $this->datamodel->insert_sensor2($ksens,$waktu,$_GET['teg']);
     } else {
         $this->datamodel->insert_sensor($ksens,$waktu);        

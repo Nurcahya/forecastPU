@@ -14,6 +14,8 @@ $this->load->view('backend/tema/header');
 	<iframe SRC=<?php echo base_url('backend/TMA/graflive2/').$_GET['id'];?> width=100% height="330" frameBorder="0"></iframe>          
          <?php } else if($_GET['kat']=='bulanan') { ?>
 	<iframe SRC=<?php echo base_url('backend/TMA/graflive3/').$_GET['id'];?> width=100% height="330" frameBorder="0"></iframe>          
+         <?php } else if($_GET['kat']=='jam') { ?>
+	<iframe SRC=<?php echo base_url('backend/TMA/graflive4/').$_GET['id'];?> width=100% height="330" frameBorder="0"></iframe>          
          <?php } else { ?> 
 	<iframe SRC=<?php echo base_url('backend/TMA/graflive/').$_GET['id'];?> width=100% height="330" frameBorder="0"></iframe>          
          <?php } ?>
@@ -46,6 +48,7 @@ $this->load->view('backend/tema/header');
                 </div>
                 <div class="box-body">
                     <a class="md-btn md-raised m-b-sm w-xs blue" href="<?php echo site_url('backend/tma?kat=10&id=').$_GET['id'] ?>">10 Menit</a>
+                    <a class="md-btn md-raised m-b-sm w-xs blue" href="<?php echo site_url('backend/tma?kat=jam&id=').$_GET['id'] ?>">Per Jam</a>
                     <a class="md-btn md-raised m-b-sm w-xs blue" href="<?php echo site_url('backend/tma?kat=harian&id=').$_GET['id'] ?>">Harian</a>
                     <a class="md-btn md-raised m-b-sm w-xs blue" href="<?php echo site_url('backend/tma?kat=bulanan&id=').$_GET['id'] ?>">Bulanan</a>
                 </div>
@@ -65,6 +68,8 @@ $this->load->view('backend/tema/header');
             <iframe SRC=<?php echo base_url('backend/tma/grid2/').$_GET['id'];?> width=100% height="500" frameBorder="0"></iframe>          
          <?php } else if($_GET['kat']=='bulanan') { ?>
             <iframe SRC=<?php echo base_url('backend/tma/grid3/').$_GET['id'];?> width=100% height="500" frameBorder="0"></iframe>          
+         <?php } else if($_GET['kat']=='jam') { ?>
+            <iframe SRC=<?php echo base_url('backend/tma/grid4/').$_GET['id'];?> width=100% height="500" frameBorder="0"></iframe>          
          <?php } else { ?> 
               <form action="<?php echo site_url();?>backend/TMA/createSess/<?php echo $_GET['id']; ?>" method="post" target="frametabel">
                 <div class='form-group'>

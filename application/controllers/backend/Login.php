@@ -54,7 +54,17 @@ class Login extends CI_Controller {
 
     function registrasi()
     {
-            $this->load->view('backend/registrasi');
+        $this->load->view('backend/registrasi');
+    }
+    
+    function get(){
+        $user= $this->adminmodel->get_admin();
+        $arraydata = array();
+        foreach ($user as $itemnya) {
+            
+            $arraydata[] = array("username"=>$itemnya->username, "password"=>$itemnya->password, "last_login"=>$itemnya->last_login);
+        } 
+        echo(json_encode($arraydata));
     }
     
     function simpan(){

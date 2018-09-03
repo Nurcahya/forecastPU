@@ -14,6 +14,8 @@ $this->load->view('backend/tema/header');
 	<iframe SRC=<?php echo base_url('backend/CH/graflive2/').$_GET['id'];?> width=100% height="330" frameBorder="0"></iframe>          
          <?php } else if($_GET['kat']=='bulanan') { ?>
 	<iframe SRC=<?php echo base_url('backend/CH/graflive3/').$_GET['id'];?> width=100% height="330" frameBorder="0"></iframe>          
+         <?php } else if($_GET['kat']=='jam') { ?>
+	<iframe SRC=<?php echo base_url('backend/CH/graflive4/').$_GET['id'];?> width=100% height="330" frameBorder="0"></iframe>          
          <?php } else { ?> 
 	<iframe SRC=<?php echo base_url('backend/CH/graflive/').$_GET['id'];?> width=100% height="330" frameBorder="0"></iframe>          
          <?php } ?>
@@ -47,6 +49,7 @@ $this->load->view('backend/tema/header');
                 </div>
                 <div class="box-body">
                     <a class="md-btn md-raised m-b-sm w-xs blue" href="<?php echo site_url('backend/ch?kat=10&id=').$_GET['id'] ?>">10 Menit</a>
+                    <a class="md-btn md-raised m-b-sm w-xs blue" href="<?php echo site_url('backend/ch?kat=jam&id=').$_GET['id'] ?>">Per Jam</a>
                     <a class="md-btn md-raised m-b-sm w-xs blue" href="<?php echo site_url('backend/ch?kat=harian&id=').$_GET['id'] ?>">Harian</a>
                     <a class="md-btn md-raised m-b-sm w-xs blue" href="<?php echo site_url('backend/ch?kat=bulanan&id=').$_GET['id'] ?>">Bulanan</a>
                 </div>
@@ -66,6 +69,8 @@ $this->load->view('backend/tema/header');
             <iframe SRC=<?php echo base_url('backend/ch/grid2/').$_GET['id'];?> width=100% height="500" frameBorder="0"></iframe>          
          <?php } else if($_GET['kat']=='bulanan') { ?>
             <iframe SRC=<?php echo base_url('backend/ch/grid3/').$_GET['id'];?> width=100% height="500" frameBorder="0"></iframe>          
+         <?php } else if($_GET['kat']=='jam') { ?>
+            <iframe SRC=<?php echo base_url('backend/ch/grid4/').$_GET['id'];?> width=100% height="500" frameBorder="0"></iframe>          
          <?php } else { ?> 
                <form action="<?php echo site_url();?>backend/CH/createSess/<?php echo $_GET['id']; ?>" method="post" target="frametabel">
                 <div class='form-group'>
@@ -76,7 +81,7 @@ $this->load->view('backend/tema/header');
                                 <td><p>Tanggal Mulai: <input type="text" name="tglmulai" id="datepicker"></p></td>
                                 <td><p>Tanggal Berakhir: <input type="text" name="tglakhir" id="datepicker2"></p></td>
                                 <td><input type="submit" value="Filter" class="btn-primary"></td>
-                                <td><a href="<?php echo site_url();?>backend/CH/grid/<?php echo $_GET['id']; ?>" target="frametabel"><input type="button" value="Reset Filter" class="btn-secondary"></a></td>
+                                <td><a href="<?php echo site_url();?>backend/ch/grid/<?php echo $_GET['id']; ?>" target="frametabel"><input type="button" value="Reset Filter" class="btn-secondary"></a></td>
                             </table>
                     
                 </div>
